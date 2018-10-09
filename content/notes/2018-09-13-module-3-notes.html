@@ -1,0 +1,265 @@
+---
+title: Module 3 Notes
+author: Justin Millar
+date: '2018-09-13'
+slug: module-3-notes
+categories:
+  - notes
+tags: []
+description: ''
+---
+
+
+
+<div id="upcoming-assignments" class="section level2">
+<h2>Upcoming Assignments</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Assignments</th>
+<th align="left">Open Time</th>
+<th align="left">Due Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Module 4 Data Quiz</td>
+<td align="left">Friday, Sept 14 (1:00 am EST)</td>
+<td align="left">Sunday, Sept 16 (11:55 pm EST)</td>
+</tr>
+<tr class="even">
+<td align="left">Module 4 Conceptual Quiz</td>
+<td align="left">Friday, Sept 14 (1:00 am EST)</td>
+<td align="left">Sunday, Sept 16 (11:55 pm EST)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-from-discussion-boardoffice-hours" class="section level2">
+<h2>Notes from Discussion Board/Office Hours</h2>
+<div id="difference-between-and--" class="section level3">
+<h3>Difference between <code>=</code> and <code>&lt;-</code></h3>
+<p>In R both <code>&lt;-</code> and <code>=</code> can be used to assign values to variables/objects, however there are some slight differences in how R uses these operators behind-the-scenes. <a href="https://renkun.me/2014/01/28/difference-between-assignment-operators-in-r/">This blog post</a> demonstrates the some these differences examples.</p>
+<p>Typically I recommend always using <code>&lt;-</code> for assigning variables, and I mostly reserve <code>=</code> for arguments within functions. A nice shortcut for &lt;- is <code>Alt</code> + <code>-</code>.</p>
+<pre class="r"><code># My preferred uses of &lt;- and =
+q &lt;- 0.12345
+rounded_q &lt;- round(q, digits = 0.2)</code></pre>
+</div>
+<div id="subsetting-dataframes" class="section level3">
+<h3>Subsetting dataframes</h3>
+<div id="using-the-subset-function" class="section level4">
+<h4>Using the <code>subset()</code> function:</h4>
+<p>The <code>subset()</code> function can be used to select specific parts of a dataframe. It includes a <code>subset</code> argument for defining which rows will be kept, and a <code>select</code> argument for choosing which columns to include. Here’s some examples using the <code>mtcarrs</code> data set:</p>
+<pre class="r"><code># Cars with more than 6 cylinders 
+subset(mtcars, subset = cyl &gt; 6)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Cars with more than 6 cylinders and high miles per gallon
+subset(mtcars, subset = cyl &gt; 6 &amp; hp &gt; 150)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Cars with more than 6 cylinders for high horsepower
+subset(mtcars, subset = cyl &gt; 6 | hp &gt; 150)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Just keep variables of interest
+subset(mtcars, subset = cyl &gt; 6 | hp &gt; 100, select = c(&quot;cyl&quot;, &quot;hp&quot;))</code></pre>
+<pre><code>##                     cyl  hp
+## Mazda RX4             6 110
+## Mazda RX4 Wag         6 110
+## Hornet 4 Drive        6 110
+## Hornet Sportabout     8 175
+## Valiant               6 105
+## Duster 360            8 245
+## Merc 280              6 123
+## Merc 280C             6 123
+## Merc 450SE            8 180
+## Merc 450SL            8 180
+## Merc 450SLC           8 180
+## Cadillac Fleetwood    8 205
+## Lincoln Continental   8 215
+## Chrysler Imperial     8 230
+## Dodge Challenger      8 150
+## AMC Javelin           8 150
+## Camaro Z28            8 245
+## Pontiac Firebird      8 175
+## Lotus Europa          4 113
+## Ford Pantera L        8 264
+## Ferrari Dino          6 175
+## Maserati Bora         8 335
+## Volvo 142E            4 109</code></pre>
+</div>
+<div id="using-operators" class="section level4">
+<h4>Using operators:</h4>
+<p>We can also select part of a dataframe using brackets <code>[]</code>. Remember that this notation uses <code>[rows,columns]</code>to define a subset. It may be useful to also use the <code>$</code> operator, which most commonly used is to select a single column in a dataframe using the name of the column (as opposed to the index). This will return a vector, which may be useful for subsetting in an index (recall the Battleship example for the lecture). Here are the same examples as above just using the operators:</p>
+<pre class="r"><code># Cars with more than 6 cylinders 
+mtcars[mtcars$cyl &gt; 6,]</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Cars with more than 6 cylinders and high miles per gallon
+mtcars[mtcars$cyl &gt; 6 &amp; mtcars$hp &gt; 150,]</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Cars with more than 6 cylinders or high horsepower
+mtcars[mtcars$cyl &gt; 6 | mtcars$hp &gt; 150,]</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code># Just keep variables of interest
+mtcars[mtcars$cyl &gt; 6 | mtcars$hp &gt; 150, c(&quot;cyl&quot;, &quot;hp&quot;)]</code></pre>
+<pre><code>##                     cyl  hp
+## Hornet Sportabout     8 175
+## Duster 360            8 245
+## Merc 450SE            8 180
+## Merc 450SL            8 180
+## Merc 450SLC           8 180
+## Cadillac Fleetwood    8 205
+## Lincoln Continental   8 215
+## Chrysler Imperial     8 230
+## Dodge Challenger      8 150
+## AMC Javelin           8 150
+## Camaro Z28            8 245
+## Pontiac Firebird      8 175
+## Ford Pantera L        8 264
+## Ferrari Dino          6 175
+## Maserati Bora         8 335</code></pre>
+<p>Both the these approaches will work the same, so use whichever you prefer.</p>
+</div>
+</div>
+<div id="useful-keyboard-shortcuts" class="section level3">
+<h3>Useful keyboard shortcuts</h3>
+<table style="width:17%;">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Windows Shortcut:</th>
+<th>Mac Shortcut:</th>
+<th>Action:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>Enter</code></td>
+<td><code>Cmd</code> + <code>Enter</code></td>
+<td>Run current line/selection</td>
+</tr>
+<tr class="even">
+<td><code>Alt</code> + <code>Enter</code></td>
+<td><code>Alt</code> + <code>Enter</code></td>
+<td>Run current line/selection (retain cursor position)</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>Shift</code> + <code>Enter</code></td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>Enter</code></td>
+<td>Run Entire</td>
+</tr>
+<tr class="even">
+<td><code>Alt</code> + <code>-</code></td>
+<td><code>Alt</code> + <code>-</code></td>
+<td>Add <code>&lt;-</code></td>
+</tr>
+<tr class="odd">
+<td><code>Alt</code> + <code>Shift</code> + <code>K</code></td>
+<td><code>Alt</code> + <code>Shift</code> + <code>K</code></td>
+<td>Show Shortcuts</td>
+</tr>
+</tbody>
+</table>
+<p>Full list of shortcuts <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts?mobile_site=true">available here</a></p>
+</div>
+<div id="extracting-files-from-compressed-zipped-folders" class="section level3">
+<h3>Extracting files from compressed (zipped) folders</h3>
+<p>In this course (and perhaps in your research) we will sometimes work with large files that must be compressed. Typically we will use .zip compression, which can be extracted by most newer PC and Mac without additional software. Other compression may require specific software to unzip (check the <code>Properties</code> of the folder, and try Google if you are unsure how to open). It is important that you either Extract the contents of the compressed folder, or manually move the files to a new location once to open the folder. This is because R will not allow you to specify a path to a file in a compressed folder.</p>
+</div>
+<div id="other-notes" class="section level3">
+<h3>Other notes</h3>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf">Cheat sheet for base R</a></li>
+<li><a href="https://rstudio.cloud/learn/cheat-sheets">List of other cheat sheets</a>.</li>
+<li>Dataframes can be exported as CSV files using the <code>write.csv()</code> function.</li>
+<li>RStudio is available on <a href="https://info.apps.ufl.edu/">UFApps</a>.</li>
+<li>You can run RStudio on the cloud at <a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=rVCBqg6xghI">This video</a> demonstrates how to find and remove outliers using the <code>identify()</code> function.</li>
+<li>Here’s a <a href="http://rstatistics.net/">site with practice problems</a>.</li>
+</ul>
+</div>
+</div>

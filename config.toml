@@ -1,0 +1,71 @@
+baseurl = "https://sta6093.justinmillar.com/"
+title = "STA6093: Intro. to Applied Statistics"
+theme = "ghostwriter"
+languageCode = "en-us"
+copyright = "Justin Millar"
+disqusShortname = "justinmillar"
+googleAnalytics = "UA-75169517-1"
+
+[Privacy]
+
+[Privacy.disqus]
+    disable = true
+
+[Privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = false
+
+[Author]
+    name = "Justin Millar"
+    profile = "https://www.justinmillar.com/"
+
+[Taxonomies]
+    tag = "tags"
+
+[Params]
+    intro = true
+    headline = "STA6093: Introduction to Applied Statistics"
+    description = "Justin's notes and additional material"
+    github = "https://github.com/justinmillar"
+    # gitlab = "https://gitlab.com/XXX"
+    #linkedin = "https://linkedin.com/in/XXX/"
+    #gplus = "https://google.com/+XXX"
+    twitter = "https://twitter.com/justinmillar"
+    #stackoverflow = "https://stackoverflow.com/users/XXX/YYY"
+    email = "jjmillar@ufl.edu"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = false
+    dateFormat = "Mon, Jan 2, 2006"
+    highlightJsUrl = ""
+    highlightJsLocalUrl = ""
+    exponeaJsUrl = ""
+    exponeaTarget = ""
+    exponeaToken = ""
+    exponeaTrackVisits = false
+
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
+[[menu.main]]
+    name = "Posts"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Module Notes"
+    url = "/notes/"
+    weight = 2
+
+#[[menu.main]]
+#    name = "Contact"
+#    url = "/page/contact/"
+#    weight = 3
+
+#[[menu.main]]
+#    name = "About"
+#    url = "/page/about/"
+#   weight = 4
