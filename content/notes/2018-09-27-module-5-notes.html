@@ -57,21 +57,21 @@ hist(a, xlim = c(-15, 20))
 hist(b, xlim = c(-15, 20))
 hist(c, xlim = c(-15, 20))
 hist(d, xlim = c(-15, 20))</code></pre>
-<p><img src="/post/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Make a 4x1 graph (stacked on top) of the four histograms
 par(mfrow = c(4,1))
 hist(a, xlim = c(-15, 20))
 hist(b, xlim = c(-15, 20))
 hist(c, xlim = c(-15, 20))
 hist(d, xlim = c(-15, 20))</code></pre>
-<p><img src="/post/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Make a 1x4 graph (side-by-side) of the four histograms
 par(mfrow = c(1,4))
 hist(a, xlim = c(-15, 20))
 hist(b, xlim = c(-15, 20))
 hist(c, xlim = c(-15, 20))
 hist(d, xlim = c(-15, 20))</code></pre>
-<p><img src="/post/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Note that whenever you set <code>par()</code>, R is going to use those graphic parameters for all of the plots you generate. If you want to change this behavior, you must change the parameters (for example: <code>par(mfrow = c(1,1))</code>).</p>
 </div>
 <div id="reshaping-data-with-tidyrgather-and-tidyrspread" class="section level3">
@@ -172,7 +172,7 @@ df_long &lt;- gather(df, key = &quot;Specimen&quot;, value = &quot;Weight&quot;,
 ggplot(df_long, aes(x = Year, y = Weight, color = Specimen)) +
   geom_point() +
   geom_line()</code></pre>
-<p><img src="/post/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We can go back to the “wide format” using the <code>spread()</code> function:</p>
 <pre class="r"><code>df_wide &lt;- spread(df_long, key = &quot;Specimen&quot;, value = &quot;Weight&quot;)</code></pre>
 <table>

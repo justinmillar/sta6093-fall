@@ -62,7 +62,7 @@ lowess &lt;- lowess(x,y)
 plot(x,y)
 abline(linear, col = &quot;blue&quot;, lwd = 2)
 lines(lowess$x, lowess$y, col = &quot;red&quot;, lwd = 2)</code></pre>
-<p><img src="/post/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="using-versus-in-the-plot-and-lowess-functions" class="section level3">
 <h3>Using <code>~</code> versus <code>,</code> in the <code>plot()</code> and <code>lowess()</code> functions</h3>
@@ -72,19 +72,19 @@ lines(lowess$x, lowess$y, col = &quot;red&quot;, lwd = 2)</code></pre>
 <pre class="r"><code># Using the ~ for both functions, Petal length is on the y-axis 
 plot(Petal.Length ~ Petal.Width, data=iris)
 lines(lowess(iris$Petal.Length ~ iris$Petal.Width), lwd=3)</code></pre>
-<p><img src="/post/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code># Using the comma for both functions, Petal length is on the x-axis
 plot(iris$Petal.Length, iris$Petal.Width)
 lines(lowess(iris$Petal.Length, iris$Petal.Width), lwd=3)</code></pre>
-<p><img src="/post/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <pre class="r"><code># Mixing the ~ and the comma, trendline isn&#39;t show because it&#39;s outside of the plot range
 plot(Petal.Length ~ Petal.Width, data=iris)
 lines(lowess(iris$Petal.Length, iris$Petal.Width), lwd=3)</code></pre>
-<p><img src="/post/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<p><img src="/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
 <pre class="r"><code># Try extending the plot range
 plot(Petal.Length ~ Petal.Width, data=iris, xlim = c(0,10), ylim = c(0,10))
 lines(lowess(iris$Petal.Length, iris$Petal.Width), lwd=3)</code></pre>
-<p><img src="/post/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
+<p><img src="/notes/2018-09-20-module-4-notes_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
 </div>
 <div id="other-notes" class="section level3">
 <h3>Other notes</h3>
