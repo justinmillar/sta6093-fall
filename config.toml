@@ -1,4 +1,4 @@
-baseurl = "https://sta6093.justinmillar.com/"
+baseurl = "https://sta6093.netlify.com/"
 title = "STA6093: Intro. to Applied Statistics"
 theme = "ghostwriter"
 languageCode = "en-us"
