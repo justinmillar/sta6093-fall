@@ -5,11 +5,12 @@ languageCode = "en-us"
 copyright = "Justin Millar"
 disqusShortname = "justinmillar"
 googleAnalytics = "UA-75169517-1"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Privacy]
 
 [Privacy.disqus]
-    disable = true
+    disable = false
 
 [Privacy.googleAnalytics]
     anonymizeIP = true
@@ -38,7 +39,7 @@ googleAnalytics = "UA-75169517-1"
     shareTwitter = true
     shareFacebook = true
     shareGooglePlus = true
-    shareLinkedIn = false
+    shareLinkedIn = true
     dateFormat = "Mon, Jan 2, 2006"
     highlightJsUrl = ""
     highlightJsLocalUrl = ""
@@ -55,10 +56,10 @@ googleAnalytics = "UA-75169517-1"
     url = "/"
     weight = 1
 
-[[menu.main]]
-    name = "Module Notes"
-    url = "/notes/"
-    weight = 2
+#[[menu.main]]
+#    name = "Module Notes"
+#    url = "/notes/"
+#    weight = 2
 
 #[[menu.main]]
 #    name = "Contact"

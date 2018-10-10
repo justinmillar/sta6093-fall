@@ -168,8 +168,9 @@ df_long &lt;- gather(df, key = &quot;Specimen&quot;, value = &quot;Weight&quot;,
 </tbody>
 </table>
 <p>This function will transform the data into the “long format”. To use this function, you specify the dataframe, then name for the “key” (column names) and the “value” (row values), then list the columns you want to gather. This makes it easier to plot the data using the <code>ggplot2</code> package:</p>
-<pre class="r"><code>library(ggplot2)
-ggplot(df_long, aes(x = Year, y = Weight, color = Specimen)) +
+<pre class="r"><code>library(ggplot2)</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.1</code></pre>
+<pre class="r"><code>ggplot(df_long, aes(x = Year, y = Weight, color = Specimen)) +
   geom_point() +
   geom_line()</code></pre>
 <p><img src="/post/notes/2018-09-27-module-5-notes_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
