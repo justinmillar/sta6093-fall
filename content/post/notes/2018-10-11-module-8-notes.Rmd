@@ -1,6 +1,6 @@
 ---
 title: Module 8 Notes
-author: Justin
+author: Justin Millar
 date: '2018-10-11'
 slug: module-8-notes
 categories:
