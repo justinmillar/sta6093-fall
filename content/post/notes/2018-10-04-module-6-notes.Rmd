@@ -6,7 +6,7 @@ slug: module-6-notes
 categories:
   - notes
 tags: []
-description: ''
+description: 'Hypothesis Testing'
 ---
 
 
