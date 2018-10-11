@@ -10,10 +10,7 @@ description: ''
 ---
 
 
-```{r setup, include=F}
-
-```
-
+#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-09-27-module-5-notes.pdf)
 
 ## Upcoming Assignments/Quizzes
 

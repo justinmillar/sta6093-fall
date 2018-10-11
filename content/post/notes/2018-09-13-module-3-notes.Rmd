@@ -9,6 +9,9 @@ tags: []
 description: ''
 ---
 
+
+#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-09-13-module-3-notes.pdf)
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

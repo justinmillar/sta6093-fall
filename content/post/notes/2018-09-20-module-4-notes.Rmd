@@ -10,6 +10,8 @@ description: ''
 ---
 
 
+#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-09-20-module-4-notes.pdf)
+
 ## Upcoming Assignments/Quizzes
 
 ```{r, echo=FALSE, results='asis'}

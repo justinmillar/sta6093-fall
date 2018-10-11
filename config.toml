@@ -3,7 +3,7 @@ title = "STA6093: Intro. to Applied Statistics"
 theme = "ghostwriter"
 languageCode = "en-us"
 copyright = "Justin Millar"
-disqusShortname = "justinmillar"
+disqusShortname = "sta6093"
 googleAnalytics = "UA-75169517-1"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
