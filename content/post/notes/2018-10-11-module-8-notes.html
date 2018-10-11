@@ -1,0 +1,157 @@
+---
+title: Module 8 Notes
+author: Justin
+date: '2018-10-11'
+slug: module-8-notes
+categories:
+  - notes
+tags: []
+description: 'Linear Models'
+---
+
+
+
+<div id="download-notes-as-a-pdf" class="section level4">
+<h4><a href="https://sta6093.netlify.com/pdf/2018-10-1-module-8-notes.pdf">Download notes as a PDF</a></h4>
+</div>
+<div id="upcoming-assignmentsquizzes" class="section level2">
+<h2>Upcoming Assignments/Quizzes</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Assignments</th>
+<th align="left">Open Time</th>
+<th align="left">Due Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Module 6 Data Quiz</td>
+<td align="left">October 12th (1:00 am EST)</td>
+<td align="left">October 14th (11:55 pm EST)</td>
+</tr>
+<tr class="even">
+<td align="left">Module 6 Conceptual Quiz</td>
+<td align="left">October 12th (1:00 am EST)</td>
+<td align="left">October 14th (11:55 pm EST)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-from-discussion-boardoffice-hours" class="section level2">
+<h2>Notes from Discussion Board/Office Hours</h2>
+<div id="statistical-power-and-the-p-value" class="section level3">
+<h3>Statistical Power and the p-value</h3>
+<p>There were a few questions from the previous Module about Power and it related to p-values, <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and sample size. Here’s a <a href="https://www.youtube.com/watch?v=6_Cuz0QqRWc">link to a nice explainer from Khan Academy</a>, which is also embedded in the <a href="https://sta6093.netlify.com/2018/10/04/2018-10-04-module-6-notes/">Module 6 notes</a>.</p>
+</div>
+<div id="how-to-tell-if-assumptions-are-met" class="section level3">
+<h3>How to tell if assumptions are met?</h3>
+<p>In the lectures this week, Dr. Baiser demonstrated some graphical approaches for determining whether the assumptions for linear models are met. These approaches are somewhat subjective, we know what patterns we should find if the assumptions are upheld, but unlike the p-value there is no computed statistic and/or threshold for defining if the assumption is met or not. As a result, these techniques are typically much better at tell us when a model assumption <strong>does not</strong> fit than when it does.</p>
+</div>
+<div id="how-does-the-amount-of-data-sample-size-related-to-the-assumption-of-normality" class="section level3">
+<h3>How does the amount of data (sample size) related to the assumption of Normality?</h3>
+<p>In the part of the lecture where Dr. Baiser is discussing assessing the assumption of Normality, he states that it is often difficult to determine if errors are normal distributed if we have only a few data points, and that if we have a lot of data points it doesn’t really matter. The first part should make sense, it’s difficult to spot a normal distribution with a few data points.</p>
+<p>But the second point is less clear. Why doesn’t it matter if the errors aren’t normal distributed if I have a very large sample size? Does this mean that if I have a very large dataset I can still get valid slope estimates even if my error aren’t normally distributed?</p>
+<p>It (very) short answer is probably yes. This has to do with the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central limit theorem</a>, which states that:</p>
+<blockquote>
+<p>when independent random variables are added, their properly normalized sum tends toward a normal distribution even if the original variables themselves are not normally distributed.</p>
+</blockquote>
+</div>
+<div id="homoscedasticity-vs.heteroscedasticity" class="section level3">
+<h3>Homoscedasticity vs. Heteroscedasticity</h3>
+<p><strong>Homoscedasticity</strong> is a another word for the homogeneity of variance. This means that the variation we see in our response variable <span class="math inline">\(Y\)</span> is consistent across the range of our predictor variable <span class="math inline">\(X\)</span> or our predicted response <span class="math inline">\(\hat{Y}\)</span>. This means that that if we plot the residuals against predicted values, the distance between the points should be about the same over each section of the x-axis (or the <em>domain</em> of <span class="math inline">\(\hat{Y}\)</span>).</p>
+<p>If instead we see some sort of pattern, like higher differences in one section of the graph than in another section, this would be indicative of <strong>heteroscedasticity</strong>:</p>
+<p><img src="/post/notes/2018-10-11-module-8-notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Again, as we dicussed earlier we’re looking for patterns, and it will typically be easier to tell of something is heteroscedastic than so be sure that it is homoscedastic. One real-world example of heteroscedastic data could be height as a function of age. Height typicaly increases as age increase (up to a certain), however there is a larger degree of variance in age-specific height during the pubescent years than outside this age range. I looked all over for some actual data to show this but couldn’t find any, if you find some email me and I’ll update this page.</p>
+</div>
+<div id="other-notes" class="section level3">
+<h3>Other notes</h3>
+<ul>
+<li>Dr. Valle and I try to keep an updated list of stats and programming courses across campus, <a href="https://ufstatscourses.shinyapps.io/shiny_tutorial/">available here.</a>.</li>
+<li>Don’t worry, we did skip Module 7, we’ll come back to it but the subject of that module is an special type of linear model, so we decided to do this module first.</li>
+<li>For transforming negatively skewed data, try a <a href="https://stats.stackexchange.com/questions/155429/how-to-transform-negative-values-to-logarithms">Fisher transformation</a>.</li>
+<li>Remember that we are checking for normality <em>in the errors</em>, not necessarily in the data itself.</li>
+<li>My office hours have moved to Tuesdays from 6:30 to 7:30 pm EST.</li>
+<li>Recall from our earlier module that when we set graphing parameters use <code>par</code> R will keep these parameters moving forward. If you’ve made a multipanel plot and want to make new single panel plots it may be helpful to “reset”&quot; the graphing parameters by running <code>par(mfrow = c(1,1))</code>.</li>
+<li>To access the <code>USairpollution</code> data for the data exercises, you will have to install and load the <code>HSAUR2</code></li>
+</ul>
+<pre class="r"><code>install.packages(&quot;HSAUR2&quot;)
+library(HSAUR2)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">SO2</th>
+<th align="right">temp</th>
+<th align="right">manu</th>
+<th align="right">popul</th>
+<th align="right">wind</th>
+<th align="right">precip</th>
+<th align="right">predays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Albany</td>
+<td align="right">46</td>
+<td align="right">47.6</td>
+<td align="right">44</td>
+<td align="right">116</td>
+<td align="right">8.8</td>
+<td align="right">33.36</td>
+<td align="right">135</td>
+</tr>
+<tr class="even">
+<td>Albuquerque</td>
+<td align="right">11</td>
+<td align="right">56.8</td>
+<td align="right">46</td>
+<td align="right">244</td>
+<td align="right">8.9</td>
+<td align="right">7.77</td>
+<td align="right">58</td>
+</tr>
+<tr class="odd">
+<td>Atlanta</td>
+<td align="right">24</td>
+<td align="right">61.5</td>
+<td align="right">368</td>
+<td align="right">497</td>
+<td align="right">9.1</td>
+<td align="right">48.34</td>
+<td align="right">115</td>
+</tr>
+<tr class="even">
+<td>Baltimore</td>
+<td align="right">47</td>
+<td align="right">55.0</td>
+<td align="right">625</td>
+<td align="right">905</td>
+<td align="right">9.6</td>
+<td align="right">41.31</td>
+<td align="right">111</td>
+</tr>
+<tr class="odd">
+<td>Buffalo</td>
+<td align="right">11</td>
+<td align="right">47.1</td>
+<td align="right">391</td>
+<td align="right">463</td>
+<td align="right">12.4</td>
+<td align="right">36.11</td>
+<td align="right">166</td>
+</tr>
+<tr class="even">
+<td>Charleston</td>
+<td align="right">31</td>
+<td align="right">55.2</td>
+<td align="right">35</td>
+<td align="right">71</td>
+<td align="right">6.5</td>
+<td align="right">40.75</td>
+<td align="right">148</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

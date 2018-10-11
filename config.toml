@@ -4,7 +4,7 @@ theme = "ghostwriter"
 languageCode = "en-us"
 copyright = "Justin Millar"
 disqusShortname = "sta6093"
-googleAnalytics = "UA-75169517-1"
+googleAnalytics = "UA-75169517-3"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Privacy]
@@ -28,7 +28,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     intro = true
     headline = "STA6093: Introduction to Applied Statistics"
     description = "Justin's notes and additional material"
-    github = "https://github.com/justinmillar"
+    github = "https://github.com/justinmillar/sta6093-site"
     # gitlab = "https://gitlab.com/XXX"
     #linkedin = "https://linkedin.com/in/XXX/"
     #gplus = "https://google.com/+XXX"

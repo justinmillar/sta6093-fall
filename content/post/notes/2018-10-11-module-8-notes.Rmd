@@ -1,0 +1,93 @@
+---
+title: Module 8 Notes
+author: Justin
+date: '2018-10-11'
+slug: module-8-notes
+categories:
+  - notes
+tags: []
+description: 'Linear Models'
+---
+
+#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-10-1-module-8-notes.pdf)
+
+## Upcoming Assignments/Quizzes
+
+```{r, echo=FALSE, results='asis'}
+
+t <- data.frame(
+  Assignments = c("Module 6 Data Quiz", "Module 6 Conceptual Quiz"),
+  "Open Time" = rep("October 12th (1:00 am EST)", 2),
+  "Due Time"  = rep("October 14th (11:55 pm EST)", 2), check.names = F
+)
+
+knitr::kable(t)
+```
+
+## Notes from Discussion Board/Office Hours
+
+### Statistical Power and the p-value
+
+There were a few questions from the previous Module about Power and it related to p-values, $\alpha$, $\beta$, and sample size. Here's a [link to a nice explainer from Khan Academy](https://www.youtube.com/watch?v=6_Cuz0QqRWc), which is also embedded in the [Module 6 notes](https://sta6093.netlify.com/2018/10/04/2018-10-04-module-6-notes/).
+
+### How to tell if assumptions are met?
+
+In the lectures this week, Dr. Baiser demonstrated some graphical approaches for determining whether the assumptions for linear models are met. These approaches are somewhat subjective, we know what patterns we should find if the assumptions are upheld, but unlike the p-value there is no computed statistic and/or threshold for defining if the assumption is met or not. As a result, these techniques are typically much better at tell us when a model assumption **does not** fit than when it does. 
+
+### How does the amount of data (sample size) related to the assumption of Normality?
+
+In the part of the lecture where Dr. Baiser is discussing assessing the assumption of Normality, he states that it is often difficult to determine if errors are normal distributed if we have only a few data points, and that if we have a lot of data points it doesn't really matter. The first part should make sense, it's difficult to spot a normal distribution with a few data points. 
+
+But the second point is less clear. Why doesn't it matter if the errors aren't normal distributed if I have a very large sample size? Does this mean that if I have a very large dataset I can still get valid slope estimates even if my error aren't normally distributed?
+
+It (very) short answer is probably yes. This has to do with the [Central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem), which states that: 
+
+> when independent random variables are added, their properly normalized sum tends toward a normal distribution even if the original variables themselves are not normally distributed. 
+
+### Homoscedasticity vs. Heteroscedasticity
+
+**Homoscedasticity** is a another word for the homogeneity of variance. This means that the variation we see in our response variable $Y$ is consistent across the range of our predictor variable $X$ or our predicted response $\hat{Y}$. This means that that if we plot the residuals against predicted values, the distance between the points should be about the same over each section of the x-axis (or the *domain* of $\hat{Y}$). 
+
+If instead we see some sort of pattern, like higher differences in one section of the graph than in another section, this would be indicative of **heteroscedasticity**:
+
+```{r, echo=FALSE}
+set.seed(1)
+x <-runif(50, 0, 1)
+y <- runif(50, -0.5, 0.5)
+z <- runif(50, -x, x)
+
+par(mfrow = c(1,2))
+plot(x, y, main="Homoscedastic", xlab = "", ylab = "", ylim = c(-1,1))
+abline(h = 0, lty=2, col="red")
+abline(h = -0.5, col="gray", lty = 3)
+abline(h = 0.5, col="gray", lty = 3)
+
+plot(x,z, main="Heteroscedastic", xlab = "", ylab = "", ylim = c(-1,1))
+abline(h = 0, lty=2, col="red")
+abline(a = 0, b = 1, col="gray", lty = 3)
+abline(a = 0, b = -1, col="gray", lty = 3)
+```
+
+Again, as we dicussed earlier we're looking for patterns, and it will typically be easier to tell of something is heteroscedastic than so be sure that it is homoscedastic. One real-world example of heteroscedastic data could be height as a function of age. Height typicaly increases as age increase (up to a certain), however there is a larger degree of variance in age-specific height during the pubescent years than outside this age range. I looked all over for some actual data to show this but couldn't find any, if you find some email me and I'll update this page.
+
+### Other notes
+
+* Dr. Valle and I try to keep an updated list of stats and programming courses across campus, [available here.](https://ufstatscourses.shinyapps.io/shiny_tutorial/).
+* Don't worry, we did skip Module 7, we'll come back to it but the subject of that module is an special type of linear model, so we decided to do this module first.
+* For transforming negatively skewed data, try a [Fisher transformation](https://stats.stackexchange.com/questions/155429/how-to-transform-negative-values-to-logarithms).
+* Remember that we are checking for normality *in the errors*, not necessarily in the data itself.
+* My office hours have moved to Tuesdays from 6:30 to 7:30 pm EST.
+* Recall from our earlier module that when we set graphing parameters use `par` R will keep these parameters moving forward. If you've made a multipanel plot and want to make new single panel plots it may be helpful to "reset"" the graphing parameters by running `par(mfrow = c(1,1))`.
+* To access the `USairpollution` data for the data exercises, you will have to install and load the `HSAUR2`
+
+```{r, eval=FALSE}
+install.packages("HSAUR2")
+library(HSAUR2)
+```
+
+```{r, echo=F}
+knitr::kable(head(HSAUR2::USairpollution))
+```
+
+
+

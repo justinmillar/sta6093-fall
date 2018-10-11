@@ -40,6 +40,11 @@ description: 'Hypothesis Testing'
 </div>
 <div id="notes-from-discussion-boardoffice-hours" class="section level2">
 <h2>Notes from Discussion Board/Office Hours</h2>
+<div id="khan-academy-video-on-statistical-power" class="section level3">
+<h3>Khan Academy video on Statistical Power</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6_Cuz0QqRWc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+</div>
 <div id="group-summary-statistics-with-the-aggregate-function" class="section level3">
 <h3>Group summary statistics with the <code>aggregate()</code> function</h3>
 <p>Getting a summary statistics based on groups (e.g. a categorical variable) is a common activity in data analysis. One way to do this is in R is to make individual subsets of the dataframe for each level of the group using the subsetting methods we have used in previous modules. However, this can become arguous for groups that have many different categroies, and can end up filling up your memory if you’re working with big data. A better approach is to use the <code>aggregate()</code> function. Here’s an example using the <code>mtcars</code> dataset, where we calculate the mean <code>hp</code> for each type of <code>cyl</code>:</p>
@@ -62,6 +67,7 @@ avg_hp_cyl[2,2] - avg_hp_cyl[1,2]</code></pre>
 <h3>Group summary statistics with the <code>dplyr</code> package</h3>
 <p>Another way to do the same calculation is to us the <code>group_by()</code> and <code>summarize()</code> functions in the <code>dplyr</code> package. This approach is nice because we can use the pipe operator <code>%&gt;%</code>, and it also works faster for large datasets than the base R approach:</p>
 <pre class="r"><code>library(dplyr, quietly = T)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.1</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
