@@ -16,7 +16,7 @@ description: 'Linear Models'
 ```{r, echo=FALSE, results='asis'}
 
 t <- data.frame(
-  Assignments = c("Module 6 Data Quiz", "Module 6 Conceptual Quiz"),
+  Assignments = c("Module 8 Data Quiz", "Module 6 Conceptual Quiz"),
   "Open Time" = rep("October 12th (1:00 am EST)", 2),
   "Due Time"  = rep("October 14th (11:55 pm EST)", 2), check.names = F
 )
@@ -72,7 +72,7 @@ Again, as we discussed earlier we're looking for patterns, and it will typically
 
 ### Other notes
 
-* Dr. Valle and I try to keep an updated list of stats and programming courses across campus, [available here.](https://ufstatscourses.shinyapps.io/shiny_tutorial/).
+* Dr. Valle and I try to keep an updated list of stats and programming courses across campus, [available here](https://ufstatscourses.shinyapps.io/shiny_tutorial/).
 * Don't worry, we did skip Module 7, we'll come back to it but the subject of that module is an special type of linear model, so we decided to do this module first.
 * For transforming negatively skewed data, try a [Fisher transformation](https://stats.stackexchange.com/questions/155429/how-to-transform-negative-values-to-logarithms).
 * Remember that we are checking for normality *in the errors*, not necessarily in the data itself.
