@@ -9,7 +9,7 @@ tags: []
 description: 'Linear Models'
 ---
 
-#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-10-1-module-8-notes.pdf)
+#### [Download notes as a PDF](https://sta6093.netlify.com/pdf/2018-10-11-module-8-notes.pdf)
 
 ## Upcoming Assignments/Quizzes
 
@@ -68,7 +68,7 @@ abline(a = 0, b = 1, col="gray", lty = 3)
 abline(a = 0, b = -1, col="gray", lty = 3)
 ```
 
-Again, as we dicussed earlier we're looking for patterns, and it will typically be easier to tell of something is heteroscedastic than so be sure that it is homoscedastic. One real-world example of heteroscedastic data could be height as a function of age. Height typicaly increases as age increase (up to a certain), however there is a larger degree of variance in age-specific height during the pubescent years than outside this age range. I looked all over for some actual data to show this but couldn't find any, if you find some email me and I'll update this page.
+Again, as we discussed earlier we're looking for patterns, and it will typically be easier to tell of something is heteroscedastic than so be sure that it is homoscedastic. One real-world example of heteroscedastic data could be height as a function of age. Height typically increases as age increase (up to a certain), however there is a larger degree of variance in age-specific height during the pubescent years than outside this age range. I looked all over for some actual data to show this but couldn't find any, if you find some email me and I'll update this page.
 
 ### Other notes
 

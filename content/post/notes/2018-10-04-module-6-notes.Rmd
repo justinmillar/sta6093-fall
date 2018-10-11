@@ -33,7 +33,7 @@ knitr::kable(t)
 
 ### Group summary statistics with the `aggregate()` function
 
-Getting a summary statistics based on groups (e.g. a categorical variable) is a common activity in data analysis. One way to do this is in R is to make individual subsets of the dataframe for each level of the group using the subsetting methods we have used in previous modules. However, this can become arguous for groups that have many different categroies, and can end up filling up your memory if you're working with big data. A better approach is to use the `aggregate()` function. Here's an example using the `mtcars` dataset, where we calculate the mean `hp` for each type of `cyl`:
+Getting a summary statistics based on groups (e.g. a categorical variable) is a common activity in data analysis. One way to do this is in R is to make individual subsets of the dataframe for each level of the group using the subsetting methods we have used in previous modules. However, this can become arduous for groups that have many different categories, and can end up filling up your memory if you're working with big data. A better approach is to use the `aggregate()` function. Here's an example using the `mtcars` dataset, where we calculate the mean `hp` for each type of `cyl`:
 
 ```{r}
 # Average horsepower for each cylinder type
