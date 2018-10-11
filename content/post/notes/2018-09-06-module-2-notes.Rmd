@@ -10,7 +10,7 @@ description: ''
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, tidy.opts=list(width.cutoff=60),tidy=TRUE)
 ```
 
 ### Using the Working Directory
@@ -46,7 +46,9 @@ You don't have to see Projects in course, but I highly recommend trying them out
 Parenthesis `( )`: used by functions: 
 ```{r, eval=FALSE}
 seq(1,10,2)
-c("cat", "dog", "bird") # Note that `c()` is a function, which stands for concatenate, used to grouping data into a vector
+c("cat", "dog", "bird") 
+# Note that `c()` is a function, which stands for concatenate, 
+# used to grouping data into a vector
 ```
 
 Brackets `[ ]` are used to index or subset parts of dataframes or vectors:

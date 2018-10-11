@@ -59,7 +59,6 @@ avg_hp_cyl[2,2] - avg_hp_cyl[1,2]</code></pre>
 <h3>Group summary statistics with the <code>dplyr</code> package</h3>
 <p>Another way to do the same calculation is to us the <code>group_by()</code> and <code>summarize()</code> functions in the <code>dplyr</code> package. This approach is nice because we can use the pipe operator <code>%&gt;%</code>, and it also works faster for large datasets than the base R approach:</p>
 <pre class="r"><code>library(dplyr, quietly = T)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.1</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:

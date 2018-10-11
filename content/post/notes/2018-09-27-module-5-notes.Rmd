@@ -10,15 +10,15 @@ description: ''
 ---
 
 
-```{r, include=F}
-knitr::opts_chunk$set(fig.align = "center")
+```{r setup, include=F}
+
 ```
 
 
 ## Upcoming Assignments/Quizzes
 
 
-```{r, echo=FALSE, results='asis'}
+```{r assignments, echo=FALSE, results='asis'}
 
 t <- data.frame(
   Assignments = c("Group Data Visualization",
@@ -40,7 +40,7 @@ Sometimes we may want to put multiple plots on the same graph (or graphing area)
 
 Here are some examples with histograms:
 
-```{r}
+```{r gen-data}
 # Generate some data for histograms
 a <- rnorm(100, 1, 1)
 b <- rnorm(100, 1, 5)
@@ -48,7 +48,7 @@ c <- rnorm(100, 5, 1)
 d <- rnorm(100, 5, 5)
 ```
 
-```{r, fig.height=6}
+```{r par-square}
 # Make a 2x2 graph of the four histograms
 par(mfrow = c(2,2))
 hist(a, xlim = c(-15, 20))
@@ -57,7 +57,7 @@ hist(c, xlim = c(-15, 20))
 hist(d, xlim = c(-15, 20))
 ```
 
-```{r, fig.height=6}
+```{r par-long, fig.height=6}
 # Make a 4x1 graph (stacked on top) of the four histograms
 par(mfrow = c(4,1))
 hist(a, xlim = c(-15, 20))
@@ -66,7 +66,7 @@ hist(c, xlim = c(-15, 20))
 hist(d, xlim = c(-15, 20))
 ```
 
-```{r, fig.height=6}
+```{r par-wide, fig.height=6}
 # Make a 1x4 graph (side-by-side) of the four histograms
 par(mfrow = c(1,4))
 hist(a, xlim = c(-15, 20))

@@ -37,18 +37,20 @@ description: ''
 <div id="differences-between-brackets-parentheses-and-quotations" class="section level3">
 <h3>Differences between brackets [ ], parentheses ( ), and quotations &quot; &quot;</h3>
 <p>Parenthesis <code>( )</code>: used by functions:</p>
-<pre class="r"><code>seq(1,10,2)
-c(&quot;cat&quot;, &quot;dog&quot;, &quot;bird&quot;) # Note that `c()` is a function, which stands for concatenate, used to grouping data into a vector</code></pre>
+<pre class="r"><code>seq(1, 10, 2)
+c(&quot;cat&quot;, &quot;dog&quot;, &quot;bird&quot;)
+# Note that `c()` is a function, which stands for
+# concatenate, used to grouping data into a vector</code></pre>
 <p>Brackets <code>[ ]</code> are used to index or subset parts of dataframes or vectors:</p>
 <pre class="r"><code># Subsetting vectors
 rivers[1]
 rivers[1:5]
 
 # Subsetting dataframes, indexed as [row,column]
-mtcars[1,]
-mtcars[,1]
-mtcars[1,1]
-mtcars[,&quot;mpg&quot;]</code></pre>
+mtcars[1, ]
+mtcars[, 1]
+mtcars[1, 1]
+mtcars[, &quot;mpg&quot;]</code></pre>
 <p>Quotation marks <code>&quot; &quot;</code> or <code>' '</code> are used to define character strings. Single and double quotes act the same in R, however they may be cases where you need to use quotes inside of quotes so it’s best to pick one you use most often and stick with it.</p>
 </div>
 <div id="installing-and-loading-packages" class="section level3">
@@ -73,8 +75,8 @@ library(c(package1, package2))
 library(package1)
 library(package2)</code></pre>
 <p>Finally, sometimes you’ll load two packages that have functions with the same name. To specify which function you want, you use package name followed by <code>::</code> and the function name:</p>
-<pre class="r"><code># package1 and package2 both a function called coolFunc()
-# To specify which version I want:
+<pre class="r"><code># package1 and package2 both a function called coolFunc() To
+# specify which version I want:
 package1::coolFunc()
 package2::coolFunc()</code></pre>
 </div>
