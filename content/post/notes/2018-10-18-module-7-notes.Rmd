@@ -1,0 +1,32 @@
+---
+title: Module 7 Notes
+author: Justin Millar
+date: '2018-10-18'
+slug: module-7-notes
+categories:
+  - notes
+tags: []
+description: 't-tests'
+---
+
+## Upcoming Assignments/Quizzes
+
+```{r, echo=FALSE, results='asis'}
+
+t <- data.frame(
+  Assignments = c(
+    "GMO Group Discussion Board",
+    "Module 7 Data Quiz", 
+    "Module 7 Conceptual Quiz"),
+  
+  "Open Time" = c(
+    "October 15th (1:00 am EST)", 
+    rep("October 19th (1:00 am EST)", 2)),
+  
+    "Due Time"  = rep("October 21st (11:55 pm EST)", 3), 
+  check.names = F
+)
+
+knitr::kable(t)
+```
+
