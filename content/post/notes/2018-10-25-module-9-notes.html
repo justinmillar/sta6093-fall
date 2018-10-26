@@ -1,0 +1,102 @@
+---
+title: Module 9 Notes
+author: Justin Millar
+date: '2018-10-25'
+slug: module-9-notes
+categories:
+  - notes
+tags: []
+description: ''
+---
+
+
+
+<div id="download-notes-as-a-pdf" class="section level4">
+<h4><a href="https://sta6093.netlify.com/pdf/2018-10-25-module-9-notes.pdf">Download notes as a PDF</a></h4>
+</div>
+<div id="upcoming-assignmentsquizzes" class="section level2">
+<h2>Upcoming Assignments/Quizzes</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Assignments</th>
+<th align="left">Open Time</th>
+<th align="left">Due Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ANOVA Article Analysis Activity</td>
+<td align="left">October 22nd (1:00 am EST)</td>
+<td align="left">October 28th (11:55 pm EST)</td>
+</tr>
+<tr class="even">
+<td align="left">Module 8 Data Quiz</td>
+<td align="left">October 26th (1:00 am EST)</td>
+<td align="left">October 28th (11:55 pm EST)</td>
+</tr>
+<tr class="odd">
+<td align="left">Module 9 Conceptual Quiz</td>
+<td align="left">October 26th (1:00 am EST)</td>
+<td align="left">October 28th (11:55 pm EST)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-from-discussion-boardoffice-hours" class="section level2">
+<h2>Notes from Discussion Board/Office Hours</h2>
+<div id="relationship-between-the-f-statistic-p-value-and-null-hypothesis" class="section level3">
+<h3>Relationship between the <span class="math inline">\(F\)</span>-statistic, p-value, and null hypothesis</h3>
+<p>In sub-module 9.3, Dr. Baiser covers how to test hypotheses using ANOVA. To do this, we calculate our observed <span class="math inline">\(F\)</span>-statistic using the mean square among groups and mean square within group from our observed data, and compare that to the distribution of possible <span class="math inline">\(F\)</span>-statistics (i.e. the <span class="math inline">\(F\)</span> distribution) based on the degrees of freedom (df) in the numeration and denominator of our <span class="math inline">\(F\)</span>-statistic to determine how significance of our observed value.</p>
+<p>Let’s make some plots to visualize this comparison step-by-step. I’ll use the same example from the sub-module 9.3 lecture. Let’s start from when we calculate our observed <span class="math inline">\(F\)</span>-statistics (pg. 15 from 9.3 notes), which I’ll call <code>f_obs</code>. Based on our calculations of the mean squares we determined that <span class="math inline">\(F_{obs} = 5.11\)</span>.</p>
+<p>Now let’s draw our <span class="math inline">\(F\)</span>-distribution. Recall that this is determined by the dfs in the numerator (<span class="math inline">\(df_{num}\)</span>) and the denominator (<span class="math inline">\(df_{den}\)</span>) of our <span class="math inline">\(F\)</span>-statistic. If we have <span class="math inline">\(a\)</span> number of treatments and <span class="math inline">\(n\)</span> number of replicates, than <span class="math inline">\(df_{num} = a - 1\)</span> and <span class="math inline">\(df_{den} = n(a-1)\)</span>. In our example, <span class="math inline">\(a=3\)</span> and <span class="math inline">\(n=3\)</span> (pg. 8), therefore <span class="math inline">\(df_{num} = 2\)</span> and <span class="math inline">\(df_{num} = 9\)</span>. With this information we can draw our <span class="math inline">\(F\)</span>-distribution by creating a vector of possible values of <span class="math inline">\(F\)</span> and passing those into the <code>df()</code> function in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
+<pre class="r"><code>library(tidyverse)
+library(ggpubr)
+
+# Possible values of F-stat:
+x = seq(from = 0, to = 10, by = 0.01)
+
+# Probability of possible values of F-stat
+y = df(x = x, df1 = 2, df2 = 9)
+
+ggplot() +
+  geom_line(aes(x, y)) +
+  labs(x = &quot;F-Statistic&quot;, y = &quot;Probability&quot;) +
+  theme_pubclean()</code></pre>
+<p><img src="/post/notes/2018-10-25-module-9-notes_files/figure-html/f-dist-1.png" width="672" /></p>
+<p>This curve shows the possible values for the <span class="math inline">\(F\)</span>-statistic (shown on the x-axis) and the probability of observing those values (y-axis) <em>if the null hypothesis were true</em> (based on the dfs we specified). We can use this to determine if we should reject or fail to reject the null hypothesis by comparing <code>f_obs</code> to a theoretical <span class="math inline">\(F\)</span>-statistic based on a critical value <span class="math inline">\(\alpha\)</span>, which you’ll recall is often set to <span class="math inline">\(\alpha = 0.05\)</span>. This <span class="math inline">\(F\)</span>-statistic, which we will call <code>f_crit</code>, will correspond to having a p-value of exactly 0.05.</p>
+<p>It is important to note that we working with a density function, which means that we are interested in the <strong>area under the curve</strong>. We <em>can not</em> simply draw a line with a y-intercept of 0.05 to find <code>f_crit</code>. Instead we need to find the “quantile” of our area of interest (5% or 0.05). Luckily the <code>qf()</code> can calculate quantile for the <span class="math inline">\(F\)</span>-distribution:</p>
+<pre class="r"><code>f_crit &lt;- qf(p = 0.05, df1 = 2, df2 = 9, lower.tail = F) </code></pre>
+<p>Which determines that <code>f_crit</code> is equal to 4.26. Note that we set <code>lower.tail = F</code> because were are using a one-way test on the high end. Now we can draw the area under the curve that represents the “rejection region”:</p>
+<pre class="r"><code>ggplot(data.frame(x,y)) +
+  geom_line(aes(x, y)) +
+  stat_function(fun = df, 
+                args = list(df1 = 2, df2 = 9), 
+                xlim = c(f_crit, 10), 
+                geom = &quot;area&quot;, 
+                fill = &quot;red&quot;, 
+                alpha = 0.6) +
+  labs(x = &quot;F-Statistic&quot;, y = &quot;Probability&quot;) +
+  theme_pubclean()</code></pre>
+<p><img src="/post/notes/2018-10-25-module-9-notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Finally, let’s add <code>f_obs</code> to our plot:</p>
+<pre class="r"><code>f_obs = 5.11
+
+ggplot(data.frame(x,y)) +
+  geom_line(aes(x, y)) +
+  stat_function(fun = df, 
+                args = list(df1 = 2, df2 = 9), 
+                xlim = c(f_crit, 10), 
+                geom = &quot;area&quot;, 
+                fill = &quot;red&quot;, 
+                alpha = 0.6) +
+  geom_vline(aes(xintercept = f_obs), color = &quot;darkblue&quot;, linetype = 2) +
+  labs(x = &quot;F-Statistic&quot;, y = &quot;Probability&quot;) +
+  theme_pubclean()</code></pre>
+<p><img src="/post/notes/2018-10-25-module-9-notes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>As you can see, <code>f_obs</code> falls in the rejection region, and therefore we will reject the null hypothesis that there is no difference between our treatments. As a final note, we can also calculate the p-value associated with <code>f_obs</code> using the <code>pf()</code> function:</p>
+<pre class="r"><code>p_value &lt;- pf(f_obs, df1 = 2, df2 = 9, lower.tail = F)
+round(p_value, 3)</code></pre>
+<pre><code>## [1] 0.033</code></pre>
+</div>
+</div>
