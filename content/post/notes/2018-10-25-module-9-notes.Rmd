@@ -34,7 +34,7 @@ In sub-module 9.3, Dr. Baiser covers how to test hypotheses using ANOVA. To do t
 
 Let's make some plots to visualize this comparison step-by-step. I'll use the same example from the sub-module 9.3 lecture. Let's start from when we calculate our observed $F$-statistics (pg. 15 from 9.3 notes), which I'll call `f_obs`. Based on our calculations of the mean squares we determined that $F_{obs} = 5.11$. 
 
-Now let's draw our $F$-distribution. Recall that this is determined by the dfs in the numerator ($df_{num}$) and the denominator ($df_{den}$) of our $F$-statistic. If we have $a$ number of treatments and $n$ number of replicates, than $df_{num} = a - 1$ and $df_{den} = n(a-1)$. In our example, $a=3$ and $n=3$ (pg. 8), therefore $df_{num} = 2$ and $df_{num} = 9$. With this information we can draw our $F$-distribution by creating a vector of possible values of $F$ and passing those into the `df()` function in `r fontawesome::fa("r-project", fill = "steelblue")`.
+Now let's draw our $F$-distribution. Recall that this is determined by the dfs in the numerator ($df_{num}$) and the denominator ($df_{den}$) of our $F$-statistic. If we have $a$ number of treatments and $n$ number of replicates, than $df_{num} = a - 1$ and $df_{den} = n(a-1)$. In our example, $a=3$ and $n=4$ (pg. 8), therefore $df_{num} = 2$ and $df_{num} = 9$. With this information we can draw our $F$-distribution by creating a vector of possible values of $F$ and passing those into the `df()` function in `r fontawesome::fa("r-project", fill = "steelblue")`.
 
 ```{r f-dist, message=FALSE}
 library(tidyverse)
