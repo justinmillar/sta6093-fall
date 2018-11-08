@@ -1,0 +1,73 @@
+---
+title: Module 11 (and 10) Notes
+author: Justin Millar
+date: '2018-11-08'
+slug: module-11-and-10-notes
+categories:
+  - notes
+tags:
+  - simple regression
+  - linear regression
+  - multiple regression
+description: 'Simple and Multiple Linear Regression'
+---
+
+## Upcoming Assignments/Quizzes
+
+```{r, echo=FALSE, results='asis'}
+
+t <- data.frame(
+  Assignments = c("Module 11 Data Quiz", "Module 11 Conceptual Quiz"),
+  "Open Time" = rep("November 9th (1:00 am EST)"  , 2),
+  "Due Time"  = rep("November 11th (11:55 pm EST)", 2), check.names = F
+)
+
+knitr::kable(t)
+```
+
+## Notes on Simple and Multiple Linear Regression
+
+One of the more common requests/comments we get from students is a desire to see more and different examples. So for this week's TA notes I'll go through some of the concepts related to linear regression we've learned in the past two modules. 
+
+You'll notice that I may use some different methods for subsetting and maniputlating data and plotting than we've covered in the course materials. There's is always more than one way to do things in R, but these shouldn't impact our final results and sometimes it's helpful to see a different approach. 
+
+### Loading data and libraries
+
+We are going to be using data from the `gapminder` package. This package contains historical data on life expectancy, population and gross domestic product (GDP) by country. 
+
+```{r load-packages}
+# Run this line of code if you don't have these packages installed:
+# install.packages(c("gapminder", "dplyr", "ggplot"))
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+```
+
+This package contains historical data on life expectancy, population and gross domestic product (GDP) by country in an object called `gapminder`.
+
+```{r, echo=FALSE}
+DT::datatable(as.data.frame(gapminder), rownames = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
