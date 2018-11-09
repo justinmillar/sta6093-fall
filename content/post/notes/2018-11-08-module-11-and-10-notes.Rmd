@@ -14,8 +14,7 @@ description: 'Simple and Multiple Linear Regression'
 
 ## Upcoming Assignments/Quizzes
 
-```{r, echo=FALSE, results='asis'}
-
+```{r, echo=FALSE, results='asis', message=FALSE}
 t <- data.frame(
   Assignments = c("Module 11 Data Quiz", "Module 11 Conceptual Quiz"),
   "Open Time" = rep("November 9th (1:00 am EST)"  , 2),
@@ -29,45 +28,196 @@ knitr::kable(t)
 
 One of the more common requests/comments we get from students is a desire to see more and different examples. So for this week's TA notes I'll go through some of the concepts related to linear regression we've learned in the past two modules. 
 
-You'll notice that I may use some different methods for subsetting and maniputlating data and plotting than we've covered in the course materials. There's is always more than one way to do things in R, but these shouldn't impact our final results and sometimes it's helpful to see a different approach. 
+You'll notice that I may use some different methods for subsetting and maniputlating data and plotting than we've covered in the course materials. There is always more than one way to do things in R, but these shouldn't impact our final results and sometimes it's helpful to see a different approach. 
 
-### Loading data and libraries
+### Load libraries and data
 
-We are going to be using data from the `gapminder` package. This package contains historical data on life expectancy, population and gross domestic product (GDP) by country. 
+I'm going to use a couple of packages from the "tidyverse" suite of R packages. I like using these packages because I find the code easier to read and plots prettier than base R. 
 
-```{r load-packages}
-# Run this line of code if you don't have these packages installed:
-# install.packages(c("gapminder", "dplyr", "ggplot"))
-library(gapminder)
-library(dplyr)
-library(ggplot2)
+
+```{r libs, message=FALSE, warning=FALSE}
+# Run this line if you have not installed these packages:
+# install.packages(c("dplyr", "ggplot2"))
+
+library(readr)   # For reading in dataframe
+library(dplyr)   # For dataframe manipulation
+library(ggplot2) # For nice plots
 ```
 
-This package contains historical data on life expectancy, population and gross domestic product (GDP) by country in an object called `gapminder`.
+For this exercise, we're going to use simple and multiple linear regression to model IMDB scores for movies from their top 5,00 movies (as of 2016). Here's is the code to load this data into R and format the columns we need:
 
-```{r, echo=FALSE}
-DT::datatable(as.data.frame(gapminder), rownames = FALSE)
+```{r data, message=FALSE, warning=FALSE}
+imdb <- read_csv("https://query.data.world/s/53o5lmqz56eb6pxsdc3qzh5glfavkv") %>%
+  select(title = movie_title, score = imdb_score, budget, gross, duration, 
+         release_year = title_year, fb_likes = movie_facebook_likes, 
+         rating = content_rating) %>% 
+  na.omit() %>%                           # Removes NAs
+  filter_if(is.numeric, all_vars(. > 0))  # Removes rows with zeros
+```
+
+```{r, echo=FALSE, warning=FALSE}
+ggthemr::ggthemr("flat")
+knitr::kable(head(imdb))
+```
+
+Some of this code may look a little strange. The biggest difference is the `%>%`, which is called a "pipe". The pipe is a special operator that comes from the `magrittr` package (`dplyr` is calling it for us here), and what it does is take the output from whatever comes before the pipe and puts it into the the first argument of the next function. 
+
+This is useful when using the `dpylr` package, which is set up to string together functions, kind of like verbs in a sentence. This does two things, it means we don't need to make intermediate objects that won't be used and it makes the code easier for humans to read. The code above can be "read" as:
+
+> First read a CSV from this location, then select these columns, then omit rows with NA, and finally filter out rows with zeros. 
+
+Looking at our data, our response variables is going to be `imdb$score`, and we have a few different predictors: film budget, gross revenue made, duration, year of release, and even Facebook likes!
+
+### Checking correlations
+
+First things first, let's look at the correlations in our data. This will help us get an idea for which predictor variables are highly associated with our response variable, and tell which covariates are correlated (which may be important for our multiple regressions).
+
+```{r, eval=FALSE}
+imdb %>% 
+  select(- c(title, rating)) %>%  # remove unneeded columns
+  cor() %>% 
+  round(2)
 ```
 
 
+```{r cor_print, echo=FALSE}
+imdb %>% 
+  select(- c(title, rating)) %>%  # remove unneeded columns
+  cor() %>% 
+  round(2) %>% 
+  knitr::kable()  # This prints nice tables, you might want to remove
+```
+
+We can visualize these correlations using the `ggcorrplot` package:
+
+```{r}
+ggcorrplot::ggcorrplot(
+  imdb %>% 
+  select(- c(title, rating)) %>% 
+  cor(), 
+  type = "lower", 
+  method = "circle", 
+  lab = T
+)
+```
 
 
+### Simple linear regression
+
+One hypothesis could be that movies that make more money should have a hinger rating, so let's use a  simple linear regresion using gross revenue `imdb$gross` to predict IMDB score `imdb$score`. First, we'll look at these varibles using a LOESS regression. 
+
+```{r}
+ggplot(imdb, aes(gross, score)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "loess", se = FALSE, size = 1.5) +
+  labs(x = "Gross revenue ($)", y = "IMDb rating", 
+       title = "IMDb rating by gross revenue", 
+       subtitle = "LOESS regression")
+```
+
+Hard to say if this will be a good predictors, there are a lot of low budget films! Let's make the linear model and check some assumptions:
+
+```{r}
+model <- lm(score ~ gross, data = imdb)
+
+# Check assumptions
+# Plot fitted vs. residuals
+ggplot() +
+  geom_point(aes(x = model$fitted.values, y = model$residuals)) +
+  geom_hline(yintercept = 0, color = "black", linetype = 2) +
+  labs(title = "Fitted vs. Residuals", 
+       subtitle = "IMDb Score ~ Gross Rev.",
+       x = "Fitted values", 
+       y = "Residuals")
+
+# QQ-plot
+ggplot() +
+  stat_qq(aes(sample = rstandard(model))) +
+  stat_qq_line(aes(sample = rstandard(model))) +
+  labs(title = "Q-Q plot", 
+       subtitle = "IMDb Score ~ Gross Rev.")
+```
+
+Our linear assumptions are not exactly what we would hope, likely due to the skewness of our predictor variable:
+```{r}
+ggplot(imdb) +
+  geom_histogram(aes(gross)) +
+  labs(title = "Gross revenue is heavily right-skewed", 
+       x = "Gross revenue ($)", y = "")
+```
+
+We can try a log transformation to see if this better fits our assumptions?
 
 
+```{r}
+# Try the log transform
+
+ggplot(imdb, aes(gross, score)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "loess", se = FALSE, size = 1.5) +
+  scale_x_log10() +
+  labs(x = "Gross revenue ($)", y = "IMDb rating", 
+       title = "IMDb rating by gross revenue", 
+       subtitle = "LOESS regression")
+
+ggplot(imdb) +
+  geom_histogram(aes(log(gross))) +
+  labs(title = "log of Gross revenue is less skewed", 
+       x = "log(Gross revenue ($))", y = "")
+
+# Make new lm
+log_model <- lm(score ~ log(gross), data = imdb)
+
+# Check assumptions
+# Plot fitted vs. residuals
+ggplot() +
+  geom_point(aes(x = log_model$fitted.values, y = log_model$residuals)) +
+  geom_hline(yintercept = 0, color = "black", linetype = 2) +
+  labs(title = "Fitted vs. Residuals", 
+       subtitle = "IMDb Score ~ log(Gross Rev.)",
+       x = "Fitted values", 
+       y = "Residuals")
+
+# QQ-plot
+ggplot() +
+  stat_qq(aes(sample = rstandard(log_model))) +
+  stat_qq_line(aes(sample = rstandard(log_model))) +
+  labs(title = "Q-Q plot", 
+       subtitle = "IMDb Score ~ log(Gross Rev.)")
+```
 
 
+This looks a little better, now let's interpret some of these results.
 
+```{r}
+anova(log_model)
+summary(log_model)
+```
 
+These tables tell us all sorts of useful information (sum of squares, mean square error, etc.). Perhaps most importantly, we see that the slope estimate has an assocaited p-value < 0.05, and that it is positive. This suggests that movies that make more money do have higher IMDb ratings!
 
+However, it is important to note that we've log-transformed our predictor variables, which makes it less clear to interpet. Now let's plot these findings.
 
+```{r}
+m <- summary(log_model)
 
+ggplot(imdb) +
+  geom_point(aes(log(gross), score), alpha = 0.1) +
+  geom_abline(intercept = m$coefficients[1,1], 
+              slope = m$coefficients[2,1], color = "#e74c3c") +
+  # Let's also add the 95% confidence interval
+  geom_abline(intercept = m$coefficients[1,1] - 1.96*m$coefficients[1,2], 
+              slope = m$coefficients[2,1] - 1.96*m$coefficients[2,2], 
+              color = "#e74c3c", linetype = 2) +
+  geom_abline(intercept = m$coefficients[1,1] + 1.96*m$coefficients[1,2], 
+              slope = m$coefficients[2,1] + 1.96*m$coefficients[2,2], 
+              color = "#e74c3c", linetype = 2) +
+  labs(x = "log Gross revenue ($)", y = "IMDb rating", 
+       title = "IMDb rating by gross revenue", 
+       subtitle = "IMDb Score ~ log(Gross Rev.)")
+  
+```
 
-
-
-
-
-
-
-
+### Multiple Regression
 
 
